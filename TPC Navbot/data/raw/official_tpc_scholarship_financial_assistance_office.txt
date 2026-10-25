@@ -1,0 +1,20 @@
+Official TPC service webpage: Scholarship and Financial Assistance Office (SFAO)
+Official page: https://www.tpc.edu.ph/services/scholarship-and-financial-assistance-office-sfao
+
+Selected structured facts:
+{
+  "destination": "Scholarship and Financial Assistance Office (SFAO)",
+  "aliases": [
+    "SFAO",
+    "Scholarship and Financial Assistance Office",
+    "Scholarship Office",
+    "Financial Assistance Office",
+    "TPC Scholarship"
+  ],
+  "services": "Scholarship processing and evaluation; information and dissemination of scholarship opportunities, eligibility criteria, guidelines, and deadlines; scholarship billing; financial liquidation and auditing; student assistance and placement for work-study programs; service-hours tracking and monitoring for student assistants; academic monitoring and scholarship renewal; and liaison and mediation concerning stipends, delays, and account adjustments.",
+  "contact": "Official information: https://www.tpc.edu.ph/services/scholarship-and-financial-assistance-office-sfao",
+  "more_information": "https://www.tpc.edu.ph/services/scholarship-and-financial-assistance-office-sfao"
+}
+
+Scope and unavailable details:
+This record covers the office name, services, and official webpage only. The exact office location, room, office hours, phone number, staff, current scholarship openings, specific eligibility requirements, application documents, and deadlines are not supplied by this record.

@@ -11,8 +11,11 @@ Selected structured facts:
     "agriculture building"
   ],
   "location": "Behind the yellow building referenced in the campus notes, to the right from the main gate.",
-  "services": "Classrooms."
+  "services": "Classrooms. Bachelor of Science in Agriculture is a four-year program focused on crop production, animal science, and agricultural management, developing skills in farming, agribusiness, and sustainable agriculture.",
+  "contact": "Official program information: https://www.tpc.edu.ph/academics/bachelor-of-science-in-agriculture",
+  "more_information": "https://www.tpc.edu.ph/academics/bachelor-of-science-in-agriculture"
 }
 
 Scope and unavailable details:
 Yellow building identity and actual route are not supplied; no route, room code, or gate-hour claim is approved.
+Official program page: https://www.tpc.edu.ph/academics/bachelor-of-science-in-agriculture

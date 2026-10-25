@@ -1,0 +1,15 @@
+TPC user-confirmed location: NSTP Office
+Location ID: TPC-NSTP-OFFICE
+Confirmation date: 2026-10-25
+
+The project maintainer directly confirmed the location in conversation:
+"its beside the school Gym/covered court"
+
+Selected fact:
+The NSTP Office is beside the school gym/covered court.
+
+This is the user's direct location confirmation. No additional school reviewer,
+handbook page, or independent campus verification is claimed. Floor, room number,
+office hours, staff, step-by-step route, walking time, distance, CWTS office,
+ROTC office, armory, and training schedule were not supplied and must not be
+inferred from this record or from the unverified generated sample.

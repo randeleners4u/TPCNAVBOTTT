@@ -84,6 +84,11 @@ div[class*="st-key-nav_"] button { min-height: 42px; border-radius: 11px; justif
 div[class*="st-key-nav_"] button p { font-size: .8rem; }
 div[class*="st-key-nav_"] button[kind="primary"] { background: rgba(91, 142, 105, .15); border-color: rgba(118, 166, 126, .12); color: var(--lime); }
 div[class*="st-key-nav_"] button:hover { background: rgba(111, 155, 123, .1); border-color: transparent; color: #d6e9dc; }
+.history-label { margin-top: 1.35rem; }
+div[class*="st-key-history_"] button { min-height: 38px; padding: 7px 10px; justify-content: flex-start; border: 1px solid transparent; border-radius: 10px; background: transparent; color: #8ea696; text-align: left; }
+div[class*="st-key-history_"] button p { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: .7rem; }
+div[class*="st-key-history_"] button:hover { background: rgba(111, 155, 123, .1); color: #d6e9dc; }
+div[class*="st-key-history_"] button[kind="primary"] { background: rgba(91, 142, 105, .14); border-color: rgba(118, 166, 126, .1); color: var(--lime); }
 .st-key-sidebar_footer { margin-top: auto; padding-top: 2.5rem; }
 .language-card { position: relative; padding: 16px 14px; border-radius: 15px; background: linear-gradient(135deg, rgba(46, 82, 54, .3), rgba(22, 40, 29, .6)); border: 1px solid rgba(136, 181, 136, .12); }
 .language-heading { font-size: .75rem; font-weight: 500; color: #c6d9c8; }

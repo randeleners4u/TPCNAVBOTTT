@@ -11,8 +11,11 @@ Selected structured facts:
     "criminology building"
   ],
   "location": "Behind the main building.",
-  "services": "Classrooms."
+  "services": "Classrooms. Bachelor of Science in Criminology is a four-year program focused on crime prevention, investigation, and correction, developing skills in law enforcement, forensic science, and criminal justice.",
+  "contact": "Official program information: https://www.tpc.edu.ph/academics/bachelor-of-science-in-criminology",
+  "more_information": "https://www.tpc.edu.ph/academics/bachelor-of-science-in-criminology"
 }
 
 Scope and unavailable details:
 The unscoped 8:30 AM motorcycle rule and incomplete bridge route are not enabled as directions or policy.
+Official program page: https://www.tpc.edu.ph/academics/bachelor-of-science-in-criminology

@@ -183,6 +183,10 @@ class TPCNavBotRAG:
         if understood and understood.supported_pattern:
             return understood.intent
         q = _norm(query)
+        if (self._entity(query) in ACADEMIC_DEPARTMENTS
+                and re.search(r"\b(?:what is|what s|tell me about|describe|course|program)\b", q)
+                and not re.search(r"\b(?:where|location|office|building|room)\b", q)):
+            return "services"
         if re.search(r'\b(?:deadline|deadlines|online option|eligibility|appointment|processing time)\b', q):
             return 'services'
         if re.search(r"\b(?:contacts?|phone|email|telepono|kontak|hotline|emergency numbers|website|facebook|url|link|who (?:do|can|should) i (?:ask|contact)|kinsa.*duolan|sino.*lapitan)\b", q):
@@ -225,7 +229,7 @@ class TPCNavBotRAG:
                 "student portal", "student handbook", "enrollment documents",
                 "academic programs", "examination policies", "grading system",
                 "attendance policies", "campus safety", "campus transportation",
-                "campus communication", "college information",
+                "campus communication", "college information", "cogso",
             }
             return "services" if entity in service_subjects else "location"
         return None
@@ -277,7 +281,10 @@ class TPCNavBotRAG:
         if (re.search(r"\b(?:offers?|offered|degree programs|courses offered)\b", q)
                 and (re.search(r"\b(?:tpc|school|college|programs?|courses?|departments|nursing)\b", q)
                      or any(_contains(q, alias) for department in ACADEMIC_DEPARTMENTS.values()
-                            for alias in department['aliases']))):
+                            for alias in department['aliases']))
+                and not any(_contains(q, alias) for topic, aliases in self.entities.items()
+                            if topic not in {"academic programs", "college information"}
+                            for alias in aliases)):
             return "academic programs"
         found = [(alias_specificity(alias), entity, alias) for entity, aliases in self.entities.items() for alias in aliases if _contains(q, alias)]
         if found:
@@ -321,7 +328,7 @@ class TPCNavBotRAG:
         boundary_words = set((
             "the a an ang mga sa ng si kay ni iyang its my our your school college "
             "tpc campus talibon polytechnic please palihug po pls plz "
-            "what which when where how who can could would will do does did is are exact "
+            "what which when where how who can could would will do does did is are exact current latest "
             "was were i me we you it about of for at in on to from near and or "
             "asa hain unsa unsay unsang unsaon pag orasa naa dapit dapita makita man diay ba kaha "
             "saan nasaan ano anong paano may meron bang makikita matatagpuan banda "
@@ -629,10 +636,11 @@ class TPCNavBotRAG:
         if self._safe_value(value):
             return 'SUCCESS', f"{record['destination']}\n\n{value}"
         if facet in {'requirements', 'documents'} and understood.category in {'enrollment', 'admissions', 'student id'}:
-            if understood.audience == 'new_student' and understood.entity == 'enrollment documents':
+            if understood.audience in {'new_student', 'transferee'} and understood.entity == 'enrollment documents':
                 services = self._localized(record.get('services'), lang)
                 items = services if isinstance(services, list) else [services] if isinstance(services, str) else []
-                matches = [item for item in items if isinstance(item, str) and re.match(r'New students\s*:', item, re.I)]
+                audience_label = r'(?:New students|Freshm(?:a|e)n)' if understood.audience == 'new_student' else r'Transferees?'
+                matches = [item for item in items if isinstance(item, str) and re.match(audience_label + r'\s*:', item, re.I)]
                 if matches:
                     return 'SUCCESS', record['destination'] + '\n\n' + '\n'.join(matches)
             return None
@@ -1182,6 +1190,11 @@ class TPCNavBotRAG:
         specific = self._pattern_answer(record, understood, lang) if understood and understood.supported_pattern else None
         specific = specific or self._specific_answer(record, standalone, lang)
         status, answer = specific or (self.answer_chain.invoke(render_request) if self.answer_chain else self._render_request(render_request))
+        more_information = self._localized(record.get("more_information"), lang)
+        if status == "SUCCESS" and self._safe_value(more_information):
+            label = {"english": "More information", "bisaya": "Dugang impormasyon", "tagalog": "Karagdagang impormasyon"}[lang]
+            answer += f"\n\n{label}: {more_information}"
+            fields = tuple(dict.fromkeys((*fields, "more_information")))
         if status == 'SUCCESS' and fields == ('details.fees',) and not field_value(record, 'details.fees', lang):
             # Existing reviewed free-new-ID/free-Wi-Fi exceptions quote services.
             fields = ('services',)

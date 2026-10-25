@@ -1,5 +1,6 @@
 """Student-facing campus assistant; factual grounding stays in the RAG service."""
 from base64 import b64encode
+from copy import deepcopy
 from contextlib import contextmanager, nullcontext
 from html import escape
 from inspect import signature
@@ -60,6 +61,7 @@ def record_answer_feedback(message_index):
         feedback="helpful" if value == 1 else "not_helpful",
     )
     metadata["feedback_recorded"] = True
+    save_current_conversation()
 STARTERS = [
     ("registrar", "office", "Find an office", "Registrar’s Office", "Where is the Registrar's Office?"),
     ("library", "book", "Explore a facility", "Campus library", "Asa dapit ang library?"),
@@ -122,10 +124,42 @@ def ask_question(question):
     st.session_state.view = "Assistant"
 
 
+def conversation_title(messages):
+    first_question = next((message.get("content", "").strip() for message in messages
+                           if message.get("role") == "user" and message.get("content", "").strip()),
+                          "Campus conversation")
+    return first_question if len(first_question) <= 42 else first_question[:39].rstrip() + "…"
+
+
+def save_current_conversation():
+    """Archive the active transcript inside this user's Streamlit session."""
+    messages = st.session_state.get("messages", [])
+    conversation_id = st.session_state.get("session_id")
+    if not conversation_id or not messages:
+        return
+    history = dict(st.session_state.get("conversation_history", {}))
+    history[conversation_id] = {
+        "title": conversation_title(messages),
+        "messages": deepcopy(messages),
+        "updated_at": time.time(),
+    }
+    newest = sorted(history.items(), key=lambda item: item[1].get("updated_at", 0), reverse=True)[:12]
+    st.session_state.conversation_history = dict(newest)
+
+
+def restore_conversation(conversation_id):
+    save_current_conversation()
+    saved = st.session_state.get("conversation_history", {}).get(conversation_id)
+    if not saved:
+        return
+    st.session_state.session_id = conversation_id
+    st.session_state.messages = deepcopy(saved.get("messages", []))
+    st.session_state.pop("preset_query", None)
+    st.session_state.view = "Assistant"
+
+
 def new_conversation():
-    bot = st.session_state.get("rag_bot")
-    if bot is not None:
-        bot.reset_conversation(st.session_state.session_id)
+    save_current_conversation()
     st.session_state.messages = []
     st.session_state.session_id = str(uuid4())
     st.session_state.pop("preset_query", None)
@@ -187,6 +221,18 @@ def render_sidebar():
                 type="primary" if st.session_state.view == view else "secondary",
                 on_click=select_view, args=(view,),
             )
+        history = st.session_state.get("conversation_history", {})
+        if history:
+            html('<div class="sidebar-label history-label">CHAT HISTORY</div>')
+            recent = sorted(history.items(), key=lambda item: item[1].get("updated_at", 0), reverse=True)
+            for conversation_id, saved in recent:
+                st.button(
+                    saved.get("title", "Campus conversation"),
+                    key=f"history_{conversation_id}", icon=":material/history:",
+                    use_container_width=True,
+                    type="primary" if conversation_id == st.session_state.session_id else "secondary",
+                    on_click=restore_conversation, args=(conversation_id,),
+                )
         with st.container(key="sidebar_footer"):
             html(
                 '<div class="language-card"><span class="language-heading">A language that feels like home.</span>'
@@ -316,7 +362,7 @@ def render_about():
         for label, tone, symbol in STATUSES.values():
             html(f'<div class="status-explanation"><span class="answer-status {tone}">{symbol} {label}</span></div>')
         st.caption("Verified locations do not automatically verify routes, walking times, or accessibility details. These need their own reviewed evidence.")
-    st.caption("Conversations are held in this browser session. New conversation clears the active chat and its follow-up context. Anonymous topic counts and optional feedback help identify information to improve; questions and personal details are not saved in these counts. New school facts require review before use.")
+    st.caption("Chats are archived separately within this browser session and can be reopened from Chat history. Closing or losing the browser session may remove them. Anonymous topic counts and optional feedback help identify information to improve; questions and personal details are not saved in those counts. New school facts require review before use.")
 
 
 def render_chat(bot):
@@ -386,13 +432,15 @@ def render_chat(bot):
             show_answer_bubble(response["answer"], len(st.session_state.messages), metadata)
         st.session_state.messages.append({"role": "assistant", "content": response["answer"], "metadata": metadata})
         st.session_state.messages = st.session_state.messages[-200:]
+        save_current_conversation()
         # Redraw replaces pending messages with the saved conversation.
         st.rerun()
 
 
 def main():
     html(f'<style>{(PROJECT_ROOT / "assets" / "styles.css").read_text(encoding="utf-8")}</style>')
-    for key, default in [("messages", []), ("session_id", str(uuid4())), ("browser_rate_id", str(uuid4())), ("view", "Assistant")]:
+    for key, default in [("messages", []), ("conversation_history", {}), ("session_id", str(uuid4())),
+                         ("browser_rate_id", str(uuid4())), ("view", "Assistant")]:
         if key not in st.session_state:
             st.session_state[key] = default
     render_sidebar()

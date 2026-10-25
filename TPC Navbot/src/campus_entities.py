@@ -33,7 +33,7 @@ ACADEMIC_DEPARTMENTS = {
     'criminology department': {
         'program': 'Bachelor of Science in Criminology',
         'name': 'Criminology (BSCRIM) department',
-        'aliases': ('bscrim', 'criminology', 'kriminolohiya', 'crim', 'crim building', 'crim department', 'criminolgy', 'bs criminology', 'bachelor of science in criminology'),
+        'aliases': ('bsc', 'bscrim', 'criminology', 'kriminolohiya', 'crim', 'crim building', 'crim department', 'criminolgy', 'bs criminology', 'bachelor of science in criminology'),
     },
     'agriculture department': {
         'program': 'Bachelor of Science in Agriculture',
@@ -43,7 +43,7 @@ ACADEMIC_DEPARTMENTS = {
     'political science department': {
         'program': 'Bachelor of Arts in Political Science',
         'name': 'Political Science (BAPS / PolSci) department office',
-        'aliases': ('baps', 'polsci', 'pol sci', 'political science', 'political science department', 'ba political science', 'bachelor of arts in political science'),
+        'aliases': ('baps', 'bapos', 'polsci', 'pol sci', 'political science', 'political science department', 'ba political science', 'bachelor of arts in political science'),
     },
     'education department': {
         'program': 'Bachelor in Early Childhood Education',
@@ -70,12 +70,13 @@ ENTITY_ALIASES = {
     'student affairs': ('student affairs', 'saso', 'student services office', 'student services'),
     'student government': ('student government', 'ssg', 'supreme student'),
     'nstp office': ('nstp', 'rotc', 'cwts'),
+    'cogso': ('tpc cogso', 'cogso', 'college operations and general services office', 'general services office', 'college operations'),
     'chapel': ('chapel', 'kapilya', 'ecumenical'),
     'restroom': ('restroom', 'comfort room', 'toilet', 'cr', 'kasilyas', 'palikuran'),
     'tuition': ('tuition', 'matrikula', 'bayranan', 'school fees'),
     'admissions': ('admission', 'admissions', 'admission requirements', 'admission and eligibility requirements'),
     'enrollment': ('enrollment', 'enrolment', 'student enrollment', 'enrollment procedures', 'student enrollment procedures', 'enroll', 'enrol', 'magpaenroll', 'magpa enroll'),
-    'scholarship': ('scholarship', 'scholarships', 'iskolarship'),
+    'scholarship': ('scholarship', 'scholarships', 'iskolarship', 'sfao', 'scholarship and financial assistance office', 'scholarship office', 'financial assistance office', 'tpc scholarship'),
     'lost and found': ('lost and found', 'lost id', 'nawagtang nga id', 'nawalang id'),
     'wifi': ('wifi', 'wi fi', 'campus internet'),
     'student portal': ('student portal', 'lms', 'tpc portal'),

@@ -1,11 +1,13 @@
 {
   "schema_version": 1,
   "purpose": "derived_verified_source_facts_and_qa",
-  "created_on": "2026-10-24",
-  "source_registry_sha256": "979b3e8ce8802cdb5eca485fa99acce73d3f9dbf0ddb4fb8fd6221ea0d65d456",
-  "approved_document_count": 35,
-  "current_document_count": 35,
+  "created_on": "2026-10-25",
+  "source_registry_sha256": "0b7817222d27129e091ac8d8b0c04376ceb8019459301df365cbea7b3aa977cc",
+  "approved_document_count": 38,
+  "current_document_count": 38,
   "current_documents": [
+    "official_tpc_cogso.txt",
+    "official_tpc_scholarship_financial_assistance_office.txt",
     "school_confirmed_01_computer_laboratories.txt",
     "school_confirmed_02_main_academic_building.txt",
     "school_confirmed_03_criminology_building.txt",
@@ -40,19 +42,21 @@
     "user_confirmed_baps_office.txt",
     "user_confirmed_beced_office.txt",
     "user_confirmed_bsais_office.txt",
-    "user_confirmed_bsis_office.txt"
+    "user_confirmed_bsis_office.txt",
+    "user_confirmed_nstp_office.txt"
   ],
-  "facts": 65,
-  "qa_records": 215,
+  "facts": 86,
+  "qa_records": 279,
   "languages": {
-    "bisaya": 65,
-    "english": 65,
-    "mixed": 20,
-    "tagalog": 65
+    "bisaya": 86,
+    "english": 86,
+    "mixed": 21,
+    "tagalog": 86
   },
   "evidence_status_counts": {
-    "direct_user_confirmation": 5,
-    "reviewed_user_reported": 60
+    "direct_user_confirmation": 16,
+    "reviewed_source": 35,
+    "reviewed_user_reported": 35
   },
   "excluded_documents": {
     "not_reviewed": 30

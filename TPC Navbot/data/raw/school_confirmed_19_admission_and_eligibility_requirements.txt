@@ -1,20 +1,26 @@
-TPC school-confirmed submission: Admission and Eligibility Requirements
-Location ID: TPC-SCHOOL-19
-Submitted record(s): 19
-School confirmation reported by the user; no independent school review by the software is claimed.
+TPC user-supplied admission information: Admissions Office
+Location ID: TPC-ADMISSION-2026-OFFICE
+Source image printed October 25, 2026 and supplied by the project maintainer.
 
 Selected structured facts:
 {
-  "destination": "Admission and Eligibility Requirements",
+  "destination": "Admissions Office",
   "aliases": [
     "admissions",
     "admission",
+    "admission office",
+    "admissions office",
     "admission requirements",
     "eligibility requirements"
   ],
-  "contact": "Registrar's Office or admissions office.",
-  "services": "Inquire with the Registrar or admissions office about available programs, application evaluation, and enrollment. Program-specific rules, exam/interview applicability, deadlines, and fees are not specified in these reviewed facts."
+  "hours": "Monday–Friday: 8:00 AM–5:00 PM; Saturday: 8:00 AM–12:00 PM; Sunday: Closed.",
+  "contact": "Message the Admissions Office first if you are unsure about the requirements.",
+  "services": [
+    "Screens admission documents.",
+    "Provides the latest official list when program requirements vary.",
+    "Supports the enrollment process after students prepare their requirements."
+  ]
 }
 
 Scope and unavailable details:
-Only the inquiry/referral is retained; entrance-exam/interview scope, age limits, exact eligibility, dates, and fees are unresolved.
+The source does not provide the Admissions Office location, room, phone number, email address, staff names, fees, deadlines, or online application details.

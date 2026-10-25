@@ -118,7 +118,7 @@ class WebChatTests(unittest.TestCase):
                 self.assertFalse(app.exception)
                 self.assertEqual(len(app.session_state["messages"]), 2)
 
-    def test_new_chat_clears_transcript_and_backend_context(self):
+    def test_new_chat_archives_and_restores_conversation_history(self):
         app = self.start_app()
         app.chat_input(key="campus_prompt").set_value("Directions to the library from Main Gate?").run()
         self.assertFalse(app.exception)
@@ -132,14 +132,21 @@ class WebChatTests(unittest.TestCase):
         app.button(key="new_chat").click().run()
         self.assertFalse(app.exception)
         self.assertEqual(app.session_state["messages"], [])
-        self.assertEqual(session.history, [])
-        self.assertIsNone(session.last_entity)
-        self.assertIsNone(session.starting_point)
-        self.assertEqual(session.pending_buildings, [])
-        self.assertEqual(session.pending_starts, [])
+        self.assertNotEqual(app.session_state["session_id"], session_id)
+        self.assertIn(session_id, app.session_state["conversation_history"])
+        self.assertTrue(session.history)
+        self.assertEqual(session.last_entity, "library")
+        self.assertTrue(session.starting_point)
         app.run()
         self.assertFalse(app.exception)
         self.assertEqual(app.session_state["messages"], [])
+
+        app.button(key="history_" + session_id).click().run()
+        self.assertFalse(app.exception)
+        self.assertEqual(app.session_state["session_id"], session_id)
+        self.assertEqual(len(app.session_state["messages"]), 2)
+        self.assertIn("library", app.session_state["messages"][0]["content"].lower())
+        self.assertEqual(session.last_entity, "library")
 
     def test_campus_data_change_refreshes_backend_and_preserves_transcript(self):
         app = self.start_app()

@@ -50,7 +50,9 @@ Recommendations and feedback appear underneath the assistant bubble.
 Multilingual question cards, a campus guide, and small follow-up chips help students
 start and continue a conversation. Source references and review metadata remain
 attached to each answer in session state. **New conversation** clears both the
-visible chat and its follow-up context. The guide
+active chat while keeping completed chats available in the session's **Chat history** list.
+Selecting a previous chat restores its transcript and follow-up context. This history is
+session-scoped and may be lost when the browser session ends. The guide
 offers questions rather than claiming unverified office locations. Visual styles
 live in `assets/styles.css`. The project and repository-root Streamlit theme
 files stay aligned so the local preview and hosted application use the same colors.

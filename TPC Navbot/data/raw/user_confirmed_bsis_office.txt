@@ -12,3 +12,7 @@ This is the user's direct location confirmation. No additional school reviewer,
 handbook page, or independent campus verification is claimed.
 Floor, room number, office hours, staff, detailed routes, and BSAIS office
 location were not supplied and must not be inferred from this record.
+
+Official program information:
+Bachelor of Science in Information Systems is a four-year program focused on computer-based information systems and ICT solutions, including systems development, business-process analysis, and ICT implementation.
+More information: https://www.tpc.edu.ph/academics/bachelor-of-science-in-information-systems

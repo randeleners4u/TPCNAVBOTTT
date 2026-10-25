@@ -14,8 +14,11 @@ Selected structured facts:
   "building": "Main Building",
   "location": "Inside the main building, beside the Guidance Office.",
   "hours": "Monday–Friday, 8:00 AM–5:00 PM.",
-  "services": "First aid treatment; basic health assessment; medical consultation; wound care; emergency assistance; health education; medical referral; health monitoring; medical records management; health and wellness programs."
+  "services": "First aid treatment; basic health assessment; medical consultation; wound care; emergency assistance; health education; medical referral; health monitoring; medical records management; health and wellness programs.",
+  "contact": "Official information: https://www.tpc.edu.ph/services/tpc-clinic",
+  "more_information": "https://www.tpc.edu.ph/services/tpc-clinic"
 }
 
 Scope and unavailable details:
+Official information page: https://www.tpc.edu.ph/services/tpc-clinic
 The supplied public service list is retained. Emergency contact/procedure, universal ID requirement, and patient records are excluded.

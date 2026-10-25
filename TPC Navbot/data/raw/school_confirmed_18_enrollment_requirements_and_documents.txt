@@ -1,7 +1,6 @@
-TPC school-confirmed submission: Enrollment Requirements and Documents
-Location ID: TPC-SCHOOL-18
-Submitted record(s): 18
-School confirmation reported by the user; no independent school review by the software is claimed.
+TPC user-supplied admission information: Admission Requirements
+Location ID: TPC-ADMISSION-2026-REQUIREMENTS
+Source image printed October 25, 2026 and supplied by the project maintainer.
 
 Selected structured facts:
 {
@@ -9,17 +8,19 @@ Selected structured facts:
   "aliases": [
     "enrollment requirements",
     "enrollment documents",
-    "admission documents"
+    "admission documents",
+    "admission requirements",
+    "freshman requirements",
+    "freshmen requirements",
+    "transferee requirements"
   ],
-  "contact": "Registrar's Office.",
+  "contact": "Admissions Office.",
   "services": [
-    "General submitted checklist; confirm current copy counts, accepted formats, deadlines, and category-specific conditions with the Registrar.",
-    "New students: Accomplished enrollment form; birth certificate; report card or transcript of records; good moral character certificate; valid ID.",
-    "Returning students: Student ID; previous academic records; accomplished enrollment form; required clearance or other documents requested by the college.",
-    "Transferees: Transcript of records/grades; honorable dismissal or transfer credentials; birth certificate; good moral character certificate; valid ID; accomplished admission/enrollment form.",
-    "Shifters: Shifting form; previous academic records; student ID; approval from the appropriate department/office."
+    "Freshmen: Original Grade 12 Report Card/Form 137 with at least a second-quarter grade; original PSA Birth Certificate; 1 long brown envelope; 1 long white folder; two 2×2 pictures with name and course indicated at the back; Entrance Exam Result; Good Moral Certificate.",
+    "Transferees: Original Transfer of Credentials (Honorable Dismissal and Transcript of Records); original PSA Birth Certificate; 1 long brown envelope; 1 long white folder; two 2×2 pictures with name and course indicated at the back; Entrance Exam Result; Good Moral Certificate.",
+    "Requirements may vary depending on the program. Confirm with the Admissions Office for the latest official list."
   ]
 }
 
 Scope and unavailable details:
-The submitted general category lists are retained with their limitation; exact copy counts, accepted formats, fees, and deadlines are unknown.
+The source supplies requirements for freshmen and transferees only. It does not list requirements for returning students or shifters, application deadlines, fees, or processing times.

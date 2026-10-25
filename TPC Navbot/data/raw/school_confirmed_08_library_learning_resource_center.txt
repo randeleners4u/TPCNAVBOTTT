@@ -12,8 +12,11 @@ Selected structured facts:
   ],
   "location": "Right side when facing the canteen.",
   "hours": "Monday–Friday, 8:00 AM–5:00 PM.",
-  "services": "Books, a reading area, and free Wi-Fi. Ask the librarian about borrowing; a library card is needed before borrowing."
+  "services": "Books, a reading area, and free Wi-Fi. Ask the librarian about borrowing; a library card is needed before borrowing.",
+  "contact": "Official information: https://www.tpc.edu.ph/services/tpc-library",
+  "more_information": "https://www.tpc.edu.ph/services/tpc-library"
 }
 
 Scope and unavailable details:
+Official information page: https://www.tpc.edu.ph/services/tpc-library
 Borrowing limits, card application, visitor eligibility, and holiday hours are not supplied.

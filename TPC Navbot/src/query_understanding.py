@@ -185,13 +185,14 @@ def understand_query(query, *, last_entity=None):
                                   enrollment_location[q], 'enrollment', 'enrollment',
                                   'location', 'location')
     requirements = (
-        (r'(?:what|which) (?:are the )?(?:documents|requirements)(?: do i need)? (?:for|to) (?:freshman |freshmen |new student )?(?:enrollment|enrolment|enroll|enrol)(?: at tpc)?', 'english'),
-        (r'(?:unsa|unsay|unsa ang) (?:mga )?(?:requirements|dokumento) (?:para sa|para) (?:freshmen |freshman |bag ong estudyante nga )?(?:enrollment|enrolment|maka enroll|magpa enroll)(?: sa tpc)?', 'bisaya'),
-        (r'(?:ano|ano ang) (?:mga )?(?:requirements|dokumento) (?:para sa|para) (?:freshmen |freshman |bagong estudyanteng )?(?:enrollment|enrolment|makapag enroll|mag enroll)(?: sa tpc)?', 'tagalog'),
+        (r'(?:what|which) (?:are the )?(?:documents|requirements)(?: do i need)? (?:for|to) (?:freshman |freshmen |new student |transferee )?(?:enrollment|enrolment|enroll|enrol)(?: at tpc)?', 'english'),
+        (r'(?:unsa|unsay|unsa ang) (?:mga )?(?:requirements|dokumento) (?:para sa|para) (?:freshmen |freshman |bag ong estudyante nga |transferee )?(?:enrollment|enrolment|maka enroll|magpa enroll)(?: sa tpc)?', 'bisaya'),
+        (r'(?:ano|ano ang) (?:mga )?(?:requirements|dokumento) (?:para sa|para) (?:freshmen |freshman |bagong estudyanteng |transferee )?(?:enrollment|enrolment|makapag enroll|mag enroll)(?: sa tpc)?', 'tagalog'),
     )
     for pattern, language in requirements:
         if re.fullmatch(pattern, q):
-            audience = 'new_student' if re.search(r'\b(?:freshman|freshmen|new student|bag ong estudyante|bagong estudyante)\b', q) else None
+            audience = ('new_student' if re.search(r'\b(?:freshman|freshmen|new student|bag ong estudyante|bagong estudyante)\b', q)
+                        else 'transferee' if re.search(r'\btransferee\b', q) else None)
             return QueryUnderstanding(query, _canonical('enrollment documents', 'requirements', 'enrollment'),
                                       language, 'enrollment', 'enrollment documents',
                                       'services', 'requirements', audience=audience)

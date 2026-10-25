@@ -142,6 +142,14 @@ class EvidencePolicyTests(unittest.TestCase):
         self.assertIn('Synthetic form A', response['answer'])
         self.assertNotIn('Synthetic document B', response['answer'])
 
+    def test_transferee_requirements_keep_the_reviewed_audience(self):
+        hit = approved_hit('Enrollment Requirements and Documents', services=[
+            'Freshmen: Synthetic form A.', 'Transferees: Synthetic document B.'])
+        response = bot([hit], use_llm=False).query('What are the requirements for transferee enrollment?')
+        self.assertEqual(response['status'], 'SUCCESS', response)
+        self.assertIn('Synthetic document B', response['answer'])
+        self.assertNotIn('Synthetic form A', response['answer'])
+
     def test_submission_followup_does_not_infer_location_from_document_requirements(self):
         hit = approved_hit('Enrollment Requirements and Documents', services=['Synthetic enrollment form.'])
         nav = bot([hit], use_llm=False)

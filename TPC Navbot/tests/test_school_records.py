@@ -53,16 +53,40 @@ class SchoolConfirmedRecordsTests(unittest.TestCase):
     def test_confirmed_records_have_content_bound_review_provenance(self):
         self.assertEqual(len(self.confirmed), 30)
         registry = SourceRegistry(self.registry_path)
+        admission_updates = {
+            "school_confirmed_17_student_enrollment_procedures.txt",
+            "school_confirmed_18_enrollment_requirements_and_documents.txt",
+            "school_confirmed_19_admission_and_eligibility_requirements.txt",
+        }
+        web_updates = {
+            "school_confirmed_03_criminology_building.txt": "https://www.tpc.edu.ph/academics/bachelor-of-science-in-criminology",
+            "school_confirmed_04_agriculture_building_field_office.txt": "https://www.tpc.edu.ph/academics/bachelor-of-science-in-agriculture",
+            "school_confirmed_08_library_learning_resource_center.txt": "https://www.tpc.edu.ph/services/tpc-library",
+            "school_confirmed_09_registrar_s_office.txt": "https://www.tpc.edu.ph/services/registrars-office",
+            "school_confirmed_11_guidance_office.txt": "https://www.tpc.edu.ph/services/guidance-and-counseling-center",
+            "school_confirmed_12_clinic_health_services.txt": "https://www.tpc.edu.ph/services/tpc-clinic",
+        }
         for name, entry in self.confirmed.items():
             with self.subTest(source=name):
                 content = (self.raw / name).read_bytes()
                 # Git deploys these files with LF; approve those same bytes on Windows.
                 self.assertNotIn(b"\r\n", content, "Reviewed sources must use LF line endings")
                 self.assertTrue(entry["verified"])
-                self.assertEqual(entry["reviewed_by"], "Flordelis Tortuga")
-                self.assertEqual(entry["reviewed_at"], "2026-10-23")
-                self.assertIn("admin", entry["official_source"].lower())
-                self.assertIn("handbook", entry["official_source"].lower())
+                if name in admission_updates:
+                    self.assertEqual(entry["reviewed_by"], "Project maintainer (direct user submission)")
+                    self.assertEqual(entry["reviewed_at"], "2026-10-25")
+                    self.assertIn("admission", entry["official_source"].lower())
+                    self.assertEqual(entry["publication_date"], "2026-10-25")
+                elif name in web_updates:
+                    self.assertEqual(entry["reviewed_by"], "Flordelis Tortuga; URL supplied by project maintainer")
+                    self.assertEqual(entry["reviewed_at"], "2026-10-25")
+                    self.assertIn("official tpc", entry["official_source"].lower())
+                    self.assertEqual(entry["source_url"], web_updates[name])
+                else:
+                    self.assertEqual(entry["reviewed_by"], "Flordelis Tortuga")
+                    self.assertEqual(entry["reviewed_at"], "2026-10-23")
+                    self.assertIn("admin", entry["official_source"].lower())
+                    self.assertIn("handbook", entry["official_source"].lower())
                 self.assertEqual(entry["sha256"], hashlib.sha256(content).hexdigest())
                 self.assertTrue(registry.metadata(name, content)["verified_source"])
                 self.assertNotIn("route_data", entry)
@@ -81,6 +105,9 @@ class SchoolConfirmedRecordsTests(unittest.TestCase):
                 "user_confirmed_bsis_office.txt", "user_confirmed_bsais_office.txt",
                 "user_confirmed_bael_office.txt", "user_confirmed_baps_office.txt",
                 "user_confirmed_beced_office.txt",
+                "user_confirmed_nstp_office.txt",
+                "official_tpc_cogso.txt",
+                "official_tpc_scholarship_financial_assistance_office.txt",
             },
         )
         for query in ("library", "registrar", "guidance"):
@@ -102,15 +129,36 @@ class SchoolConfirmedRecordsTests(unittest.TestCase):
                 self.assertIn("canteen", answer["answer"].lower())
                 self.assertTrue(answer["sources"])
                 self.assertTrue(all(source.split(" [", 1)[0] in self.confirmed for source in answer["sources"]))
-                self.assertEqual(answer["source_details"][0]["reviewed_at"], "2026-10-23")
-                self.assertEqual(answer["source_details"][0]["reviewed_by"], "Flordelis Tortuga")
-                self.assertIn("handbook", answer["source_details"][0]["official_source"].lower())
+                self.assertEqual(answer["source_details"][0]["reviewed_at"], "2026-10-25")
+                self.assertEqual(answer["source_details"][0]["reviewed_by"], "Flordelis Tortuga; URL supplied by project maintainer")
+                self.assertIn("official tpc library", answer["source_details"][0]["official_source"].lower())
                 self.assertNotIn("school_confirmed_", answer["answer"])
                 self.assertNotIn(MESSAGES[language]["route_missing"], answer["answer"])
         hours = self.bot.query("What are the library office hours?")
         self.assertEqual(hours["status"], "SUCCESS")
         self.assertIn("8:00", hours["answer"])
         self.assertIn("5:00", hours["answer"])
+        self.assertIn("https://www.tpc.edu.ph/services/tpc-library", hours["answer"])
+        missing_phone = self.bot.query("What is the library phone number?")
+        self.assertEqual(missing_phone["status"], "UNVERIFIED")
+        self.assertIn("https://www.tpc.edu.ph/services/tpc-library", missing_phone["answer"])
+
+    def test_individual_program_questions_include_their_official_pages(self):
+        cases = (
+            ("What is BAEL?", "English language", "https://www.tpc.edu.ph/academics/bachelor-of-arts-in-english-language"),
+            ("What is BAPOS?", "government systems", "https://www.tpc.edu.ph/academics/bachelor-of-arts-in-political-science"),
+            ("What is BECED?", "child development", "https://www.tpc.edu.ph/academics/bachelor-in-early-childhood-education"),
+            ("What is BSA?", "crop production", "https://www.tpc.edu.ph/academics/bachelor-of-science-in-agriculture"),
+            ("What is BSAIS?", "accounting principles", "https://www.tpc.edu.ph/academics/bachelor-of-science-in-accounting-information-systems"),
+            ("What is BSC?", "crime prevention", "https://www.tpc.edu.ph/academics/bachelor-of-science-in-criminology"),
+            ("What is BSIS?", "computer-based information systems", "https://www.tpc.edu.ph/academics/bachelor-of-science-in-information-systems"),
+        )
+        for query, description, url in cases:
+            with self.subTest(query=query):
+                response = self.bot.query(query)
+                self.assertEqual(response["status"], "SUCCESS", response)
+                self.assertIn(description.lower(), response["answer"].lower())
+                self.assertIn(url, response["answer"])
 
     def test_destination_change_uses_relevant_evidence_instead_of_previous_source(self):
         registrar = self.bot.chat("Where is the Registrar's Office?")
@@ -136,9 +184,14 @@ class SchoolConfirmedRecordsTests(unittest.TestCase):
         answer = self.bot.query("Where is the Registrar's Office?")
         self.assertEqual(answer["status"], "SUCCESS")
         self.assertIn("in front of the main gate", answer["answer"].lower())
+        self.assertIn("https://www.tpc.edu.ph/services/registrars-office", answer["answer"])
+        self.assertIn("more_information", answer["source_details"][0]["claim_fields"])
         self.assertNotIn(MESSAGES["english"]["route_missing"], answer["answer"])
         self.assertNotIn("Source:", answer["answer"])
         self.assertIn("registrar", answer["source_details"][0]["source_doc"])
+        missing_phone = self.bot.query("What is the Registrar's Office phone number?")
+        self.assertEqual(missing_phone["status"], "UNVERIFIED")
+        self.assertIn("https://www.tpc.edu.ph/services/registrars-office", missing_phone["answer"])
 
     def test_registrar_landmark_does_not_invent_route_steps_or_walking_time(self):
         for query in ("Directions to the registrar from Main Gate?",
@@ -156,8 +209,25 @@ class SchoolConfirmedRecordsTests(unittest.TestCase):
         self.assertEqual(answer["status"], "SUCCESS")
         self.assertIn("main", answer["answer"].lower())
         self.assertIn("clinic", answer["answer"].lower())
+        self.assertIn("https://www.tpc.edu.ph/services/guidance-and-counseling-center", answer["answer"])
+        self.assertIn("more_information", answer["source_details"][0]["claim_fields"])
         self.assertTrue(answer["sources"])
         self.assertTrue(all(source.split(" [", 1)[0] in self.confirmed for source in answer["sources"]))
+        missing_phone = self.bot.query("What is the Guidance Office phone number?")
+        self.assertEqual(missing_phone["status"], "UNVERIFIED")
+        self.assertIn("https://www.tpc.edu.ph/services/guidance-and-counseling-center", missing_phone["answer"])
+
+    def test_clinic_answers_include_official_page_without_inventing_contact_details(self):
+        url = "https://www.tpc.edu.ph/services/tpc-clinic"
+        location = self.bot.query("Where is the TPC Clinic?")
+        self.assertEqual(location["status"], "SUCCESS", location)
+        self.assertIn("main building", location["answer"].lower())
+        self.assertIn("guidance office", location["answer"].lower())
+        self.assertIn(url, location["answer"])
+        self.assertEqual(location["source_details"][0]["source_doc"], "school_confirmed_12_clinic_health_services.txt")
+        missing_phone = self.bot.query("What is the TPC Clinic phone number?")
+        self.assertEqual(missing_phone["status"], "UNVERIFIED", missing_phone)
+        self.assertIn(url, missing_phone["answer"])
 
     def test_programs_laboratories_faculty_and_it_are_retrievable(self):
         cases = (
@@ -174,6 +244,77 @@ class SchoolConfirmedRecordsTests(unittest.TestCase):
                 self.assertIn(expected, answer["answer"])
                 self.assertTrue(answer["sources"])
                 self.assertTrue(all(source.split(" [", 1)[0] in self.confirmed for source in answer["sources"]))
+
+    def test_current_admission_requirements_process_and_hours_are_retrievable(self):
+        cases = (
+            ("What are the requirements for freshman enrollment?", ("Form 137", "2×2", "Good Moral"), ("Transfer of Credentials",)),
+            ("What are the requirements for transferee enrollment?", ("Transfer of Credentials", "Transcript of Records", "2×2"), ("Form 137",)),
+            ("What is the enrollment process?", ("Step 1", "Step 5", "confirmation slip"), ()),
+            ("What are the Admissions Office hours?", ("Monday–Friday", "Saturday", "Sunday: Closed"), ()),
+        )
+        for query, expected, excluded in cases:
+            with self.subTest(query=query):
+                response = self.bot.query(query)
+                self.assertEqual(response["status"], "SUCCESS", response)
+                for text in expected:
+                    self.assertIn(text, response["answer"])
+                for text in excluded:
+                    self.assertNotIn(text, response["answer"])
+                self.assertTrue(response["sources"])
+                self.assertEqual(response["source_details"][0]["reviewed_at"], "2026-10-25")
+
+    def test_nstp_office_uses_directly_confirmed_gym_landmark_only(self):
+        response = self.bot.query("Where is the NSTP Office?")
+        self.assertEqual(response["status"], "SUCCESS", response)
+        self.assertIn("beside the school gym/covered court", response["answer"].lower())
+        self.assertEqual(response["source_details"][0]["source_doc"], "user_confirmed_nstp_office.txt")
+        self.assertNotIn("south grounds", response["answer"].lower())
+        self.assertNotIn("nstp-101", response["answer"].lower())
+        hours = self.bot.query("What are the NSTP Office hours?")
+        self.assertEqual(hours["status"], "UNVERIFIED", hours)
+        self.assertNotIn("sunday", hours["answer"].lower())
+
+    def test_cogso_services_and_official_page_are_retrievable_without_inventing_location(self):
+        for query in (
+            "What services does TPC-COGSO offer?",
+            "COGSO",
+            "College Operations and General Services Office",
+        ):
+            with self.subTest(query=query):
+                response = self.bot.query(query)
+                self.assertEqual(response["status"], "SUCCESS", response)
+                self.assertIn("facilities and building maintenance", response["answer"].lower())
+                self.assertIn("https://www.tpc.edu.ph/services/tpc-cogso-college-operations-and-general-services-office", response["answer"])
+                self.assertEqual(response["source_details"][0]["source_doc"], "official_tpc_cogso.txt")
+        for query in ("Where is COGSO?", "What are the COGSO office hours?"):
+            with self.subTest(query=query):
+                response = self.bot.query(query)
+                self.assertEqual(response["status"], "UNVERIFIED", response)
+                self.assertIn("https://www.tpc.edu.ph/services/tpc-cogso-college-operations-and-general-services-office", response["answer"])
+
+    def test_scholarship_office_services_and_official_page_are_retrievable(self):
+        url = "https://www.tpc.edu.ph/services/scholarship-and-financial-assistance-office-sfao"
+        for query in (
+            "What services does the Scholarship and Financial Assistance Office offer?",
+            "SFAO",
+            "What does the scholarship office do?",
+        ):
+            with self.subTest(query=query):
+                response = self.bot.query(query)
+                self.assertEqual(response["status"], "SUCCESS", response)
+                self.assertIn("scholarship processing and evaluation", response["answer"].lower())
+                self.assertIn("student assistance and placement", response["answer"].lower())
+                self.assertIn(url, response["answer"])
+                self.assertEqual(response["source_details"][0]["source_doc"], "official_tpc_scholarship_financial_assistance_office.txt")
+        for query in (
+            "Where is SFAO?",
+            "What are the Scholarship Office hours?",
+            "What is the current scholarship deadline?",
+        ):
+            with self.subTest(query=query):
+                response = self.bot.query(query)
+                self.assertEqual(response["status"], "UNVERIFIED", response)
+                self.assertIn(url, response["answer"])
 
     def test_unknown_fields_and_sample_room_numbers_are_not_filled_from_samples(self):
         for query in (
@@ -194,13 +335,21 @@ class SchoolConfirmedRecordsTests(unittest.TestCase):
                     self.assertEqual(answer['source_details'], [])
                     continue
                 self.assertTrue(answer["answer"].startswith(MESSAGES["english"]["unverified"]))
-                if query in ("What is the passing grade at TPC?", "What is the school calendar?"):
+                if query in (
+                    "What is the passing grade at TPC?",
+                    "What is the school calendar?",
+                    "What is the library phone number?",
+                    "Is the library wheelchair accessible?",
+                ):
                     # These topics now help the student reach the approved
                     # referral while still withholding grades and dates.
                     self.assertIn("Confirm with:", answer["answer"])
                     self.assertTrue(answer["sources"])
                     self.assertTrue(all(source.split(" [", 1)[0] in self.confirmed for source in answer["sources"]))
-                    self.assertNotRegex(answer["answer"], r"\b(?:75|2026|October|November)\b")
+                    if "library" in query.lower():
+                        self.assertIn("https://www.tpc.edu.ph/services/tpc-library", answer["answer"])
+                    else:
+                        self.assertNotRegex(answer["answer"], r"\b(?:75|2026|October|November)\b")
                 else:
                     self.assertEqual(answer["sources"], [])
                     self.assertEqual(answer["answer"], MESSAGES["english"]["unverified"])

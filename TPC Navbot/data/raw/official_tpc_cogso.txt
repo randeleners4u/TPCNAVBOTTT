@@ -1,0 +1,20 @@
+Official TPC service webpage: TPC-COGSO (College Operations and General Services Office)
+Official page: https://www.tpc.edu.ph/services/tpc-cogso-college-operations-and-general-services-office
+
+Selected structured facts:
+{
+  "destination": "TPC-COGSO (College Operations and General Services Office)",
+  "aliases": [
+    "TPC-COGSO",
+    "COGSO",
+    "College Operations and General Services Office",
+    "General Services Office",
+    "College Operations"
+  ],
+  "services": "Facilities and building maintenance; general services; property and supply management; procurement and supply support; transportation and motor pool; facilities and space management; operations and logistical support; inventory and property custodianship; repair and maintenance requests; and safety, cleanliness, and environmental support.",
+  "contact": "Official information: https://www.tpc.edu.ph/services/tpc-cogso-college-operations-and-general-services-office",
+  "more_information": "https://www.tpc.edu.ph/services/tpc-cogso-college-operations-and-general-services-office"
+}
+
+Scope and unavailable details:
+This record covers the office name, services, and official webpage only. The exact office location, room, office hours, phone number, staff, and navigation route are not supplied by this record.

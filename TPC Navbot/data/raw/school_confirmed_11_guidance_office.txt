@@ -14,8 +14,11 @@ Selected structured facts:
   "building": "Main Building",
   "location": "Inside the main building, beside the clinic. When entering the main building, the clinic is on the left and the Guidance Office is beside it.",
   "hours": "Monday–Friday, 8:00 AM–5:00 PM.",
-  "services": "Counseling and guidance."
+  "services": "Counseling and guidance.",
+  "contact": "Official information: https://www.tpc.edu.ph/services/guidance-and-counseling-center",
+  "more_information": "https://www.tpc.edu.ph/services/guidance-and-counseling-center"
 }
 
 Scope and unavailable details:
+Official information page: https://www.tpc.edu.ph/services/guidance-and-counseling-center
 No room code, appointment procedure, universal student-ID requirement, or service eligibility is inferred.
