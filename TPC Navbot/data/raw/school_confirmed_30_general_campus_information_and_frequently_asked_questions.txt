@@ -18,14 +18,15 @@ Selected structured facts:
     "TPC phone",
     "TPC email"
   ],
-  "location": "San Isidro, Talibon, Bohol, Philippines.",
-  "contact": "Telephone: (038) 411 5340; Email: tpcwebsite05@gmail.com; Facebook: https://www.facebook.com/TalibonPolytechnicCollege; Website: https://www.tpc.edu.ph/",
+  "location": "San Isidro, Talibon, Bohol, Philippines. Official Google Maps: https://www.google.com/maps/place/Talibon+Polytechnic+College/@10.134801,124.322823,3664m/data=!3m1!1e3!4m6!3m5!1s0x33a9f1442b17a629:0xdc25a9f343aa88fb!8m2!3d10.1348009!4d124.3228225!16s%2Fg%2F11j7b1rv93?hl=en-US&entry=ttu",
+  "contact": "Telephone: (038) 411 5340; Email: tpcwebsite05@gmail.com; Facebook: https://www.facebook.com/TalibonPolytechnicCollege; Website: https://www.tpc.edu.ph/; Official Google Maps: https://www.google.com/maps/place/Talibon+Polytechnic+College/@10.134801,124.322823,3664m/data=!3m1!1e3!4m6!3m5!1s0x33a9f1442b17a629:0xdc25a9f343aa88fb!8m2!3d10.1348009!4d124.3228225!16s%2Fg%2F11j7b1rv93?hl=en-US&entry=ttu",
   "services": [
     "Official college name: Talibon Polytechnic College (TPC).",
-    "Campus address: San Isidro, Talibon, Bohol, Philippines.",
+    "Campus address: San Isidro, Talibon, Bohol, Philippines. Official Google Maps: https://www.google.com/maps/place/Talibon+Polytechnic+College/@10.134801,124.322823,3664m/data=!3m1!1e3!4m6!3m5!1s0x33a9f1442b17a629:0xdc25a9f343aa88fb!8m2!3d10.1348009!4d124.3228225!16s%2Fg%2F11j7b1rv93?hl=en-US&entry=ttu",
     "Public contact channels: Telephone: (038) 411 5340; Email: tpcwebsite05@gmail.com; Facebook: https://www.facebook.com/TalibonPolytechnicCollege; Website: https://www.tpc.edu.ph/"
   ]
 }
 
 Scope and unavailable details:
 Public identity, address, and supplied contacts only. Mission/vision wording and generic procedures are preserved in the original attachment but not mapped to factual answers.
+The project maintainer supplied the official Google Maps place listing for Talibon Polytechnic College. It does not establish travel time, distance, or turn-by-turn directions.

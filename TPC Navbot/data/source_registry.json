@@ -1051,13 +1051,13 @@
     "school_confirmed_30_general_campus_information_and_frequently_asked_questions.txt": {
       "verified": true,
       "source_type": "authorized_campus_record",
-      "sha256": "0a7f997a3be05c89c7ad891d4238b8f205797c122740217af7a0644298ccdb04",
+      "sha256": "630a115d0b4d15bd378e31f3756bcdb8b318ab9120ec2db95cc649bbe584679f",
       "official_source": "Admin and handbook; user-supplied school confirmation, record(s) 29 and 30",
       "reviewed_by": "Flordelis Tortuga",
       "reviewed_at": "2026-10-23",
       "review_method": "school_confirmation_reported_by_user",
       "submitted_reference": "data/submissions/school_confirmation_2026-10-23/TPC_NavBot_30_Knowledge_Records.md",
-      "notes": "Reviewer, date and source supplied by the user. Reviewer position, exact handbook edition and page references were not supplied. Approval covers only selected structured facts, not the draft's unresolved fields. Public identity, address, and supplied contacts only. Mission/vision wording and generic procedures are preserved in the original attachment but not mapped to factual answers.",
+      "notes": "Reviewer, date and source supplied by the user. Public identity, address, and supplied contacts only. The project maintainer supplied the official Google Maps place listing for Talibon Polytechnic College. It does not establish travel time, distance, or turn-by-turn directions.",
       "location_data": {
         "destination": "Talibon Polytechnic College",
         "aliases": [
@@ -1072,11 +1072,11 @@
           "TPC phone",
           "TPC email"
         ],
-        "location": "San Isidro, Talibon, Bohol, Philippines.",
-        "contact": "Telephone: (038) 411 5340; Email: tpcwebsite05@gmail.com; Facebook: https://www.facebook.com/TalibonPolytechnicCollege; Website: https://www.tpc.edu.ph/",
+        "location": "San Isidro, Talibon, Bohol, Philippines. Official Google Maps: https://www.google.com/maps/place/Talibon+Polytechnic+College/@10.134801,124.322823,3664m/data=!3m1!1e3!4m6!3m5!1s0x33a9f1442b17a629:0xdc25a9f343aa88fb!8m2!3d10.1348009!4d124.3228225!16s%2Fg%2F11j7b1rv93?hl=en-US&entry=ttu",
+        "contact": "Telephone: (038) 411 5340; Email: tpcwebsite05@gmail.com; Facebook: https://www.facebook.com/TalibonPolytechnicCollege; Website: https://www.tpc.edu.ph/; Official Google Maps: https://www.google.com/maps/place/Talibon+Polytechnic+College/@10.134801,124.322823,3664m/data=!3m1!1e3!4m6!3m5!1s0x33a9f1442b17a629:0xdc25a9f343aa88fb!8m2!3d10.1348009!4d124.3228225!16s%2Fg%2F11j7b1rv93?hl=en-US&entry=ttu",
         "services": [
           "Official college name: Talibon Polytechnic College (TPC).",
-          "Campus address: San Isidro, Talibon, Bohol, Philippines.",
+          "Campus address: San Isidro, Talibon, Bohol, Philippines. Official Google Maps: https://www.google.com/maps/place/Talibon+Polytechnic+College/@10.134801,124.322823,3664m/data=!3m1!1e3!4m6!3m5!1s0x33a9f1442b17a629:0xdc25a9f343aa88fb!8m2!3d10.1348009!4d124.3228225!16s%2Fg%2F11j7b1rv93?hl=en-US&entry=ttu",
           "Public contact channels: Telephone: (038) 411 5340; Email: tpcwebsite05@gmail.com; Facebook: https://www.facebook.com/TalibonPolytechnicCollege; Website: https://www.tpc.edu.ph/"
         ]
       }

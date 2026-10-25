@@ -98,7 +98,7 @@ ENTITY_ALIASES = {
     'campus accessibility': ('campus facilities and accessibility', 'campus accessibility', 'campus facilities', 'campus ramps', 'campus wheelchair access'),
     'campus transportation': ('campus transportation and parking rules', 'campus transportation', 'transportation rules', 'parking rules'),
     'campus communication': ('campus communication channels and announcements', 'campus communication', 'communication channels', 'campus announcements', 'official announcements', 'official website', 'tpc website', 'college website', 'official facebook page'),
-    'college information': ('general college information', 'general campus information', 'college information', 'about tpc', 'about talibon polytechnic college', 'talibon polytechnic college', 'tpc contact', 'tpc phone', 'tpc email', 'tpc address', 'campus address', 'college address'),
+    'college information': ('general college information', 'general campus information', 'college information', 'about tpc', 'about talibon polytechnic college', 'talibon polytechnic college', 'tpc contact', 'tpc phone', 'tpc email', 'tpc address', 'campus address', 'college address', 'google maps', 'tpc map', 'campus map'),
     'computer studies': ('computer studies', 'ccis'),
 }
 

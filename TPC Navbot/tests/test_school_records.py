@@ -160,6 +160,18 @@ class SchoolConfirmedRecordsTests(unittest.TestCase):
                 self.assertIn(description.lower(), response["answer"].lower())
                 self.assertIn(url, response["answer"])
 
+    def test_college_location_includes_google_maps_without_inventing_route_metrics(self):
+        maps_url = "https://www.google.com/maps/place/Talibon+Polytechnic+College/@10.134801,124.322823,3664m/data=!3m1!1e3!4m6!3m5!1s0x33a9f1442b17a629:0xdc25a9f343aa88fb!8m2!3d10.1348009!4d124.3228225!16s%2Fg%2F11j7b1rv93?hl=en-US&entry=ttu"
+        response = self.bot.query("Where is Talibon Polytechnic College?")
+        self.assertEqual(response["status"], "SUCCESS", response)
+        self.assertIn("San Isidro, Talibon, Bohol", response["answer"])
+        self.assertIn(maps_url, response["answer"])
+        self.assertNotIn(MESSAGES["english"]["walking"] + ":", response["answer"])
+        self.assertNotIn(MESSAGES["english"]["distance"] + ":", response["answer"])
+        maps = self.bot.query("Google Maps link for TPC")
+        self.assertEqual(maps["status"], "SUCCESS", maps)
+        self.assertIn(maps_url, maps["answer"])
+
     def test_destination_change_uses_relevant_evidence_instead_of_previous_source(self):
         registrar = self.bot.chat("Where is the Registrar's Office?")
         library = self.bot.chat("Where is the library?")
