@@ -8,7 +8,7 @@ The supplied guide (p8) calls for a 10-15 minute presentation, 5-10 minutes of Q
 |---|---|---|
 | 1 minute | Student problem and target users | Clear campus-only scope and supported languages. |
 | 2 minutes | Architecture and source trust | Raw text -> preprocessing -> embeddings -> store -> scope/retrieval -> reviewed fields -> UI. Show source registry and separate route verification. |
-| 4-5 minutes | Live deployed demo | At least five realistic queries, including a refusal and unavailable information. Identify any fictional fixture clearly. |
+| 4-5 minutes | Live deployed demo (https://tpcnavbottt-86x6mfwrmyvliw3xgpg2qp.streamlit.app/) | At least five realistic queries, including a refusal and unavailable information. Identify any fictional fixture clearly. |
 | 2 minutes | Technical decisions | Actual framework/backend, cosine equivalence, generated-data limits, and model customization rationale. |
 | 1-2 minutes | Results and limitations | Regression output, observed lexical retrieval failures, missing real campus route evidence. |
 | 1 minute | Next work and ownership | Actual contributors, remote deployment artifact, and source approval plan. |

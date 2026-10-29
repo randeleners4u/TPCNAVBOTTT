@@ -52,6 +52,8 @@ No verified digital campus map, full route database, live GPS, or real-time posi
 
 Streamlit and CLI entry points expose the same core behavior. The web interface describes verification limitations and avoids presenting generated sample locations or route metrics as confirmed facts. User-facing errors should preserve the same supported language where possible and keep credentials/internal exception details private.
 
+The application is deployed live on Streamlit Community Cloud at [https://tpcnavbottt-86x6mfwrmyvliw3xgpg2qp.streamlit.app/](https://tpcnavbottt-86x6mfwrmyvliw3xgpg2qp.streamlit.app/) from repository `randeleners4u/TPCNAVBOTTT`.
+
 A multi-stage Dockerfile separates dependency construction from runtime and uses a non-root user. Secrets belong in private environment configuration. Repository-root CI is the correct location for GitHub Actions; configuration must not be confused with a completed successful workflow. Local browser execution and a Dockerfile are also insufficient evidence that a container is deployed remotely.
 
 The final dependency-equipped regression run passed 51 tests with no skips, including an actual Streamlit AppTest, in 11.494 seconds. Tests cover source eligibility, stale approvals, session isolation, relevant/unrelated follow-ups, overrides, ambiguous locations, route constraints, and localized behavior. The final semantic+Chroma+LangChain demo passed 8/8 scenarios. Semantic ingestion indexed 114 chunks from 30 files, all unverified, in 6.55 seconds. Fixed tests establish those cases only. API mocks validate handling but do not prove live provider success. The audit separates implemented artifacts from missing demonstrations and avoids numerical grades or fabricated surveys.

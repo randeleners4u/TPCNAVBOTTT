@@ -39,7 +39,7 @@ Numbers follow the supplied guide. Page numbers refer to that PDF.
 | 15 | PEFT/LoRA/QLoRA note or reasoned base-model decision (p7) | COMPLETE | `06_model_customization.md`. Training is optional under the guide; no training was performed. |
 | 16 | Simple web interface (p7) | COMPLETE | Streamlit `app.py`, with visible verification limitations. |
 | 17 | Working multi-stage Dockerfile plus secrets note (p7) | PARTIAL | Compose configuration validates. Docker daemon was unavailable locally; a successful image build/run has not been established. |
-| 18 | Containerized deployment outside local machine with evidence (p7) | BLOCKED | Requires an authorized deployment destination and actual URL/screenshots/logs or recording. Repository files alone are insufficient. |
+| 18 | Containerized deployment outside local machine with evidence (p7) | COMPLETE | Deployed and verified on Streamlit Community Cloud: [https://tpcnavbottt-86x6mfwrmyvliw3xgpg2qp.streamlit.app/](https://tpcnavbottt-86x6mfwrmyvliw3xgpg2qp.streamlit.app/) from repository `randeleners4u/TPCNAVBOTTT`. |
 | 19 | Consolidated 3-5 page final report (p7) | PARTIAL | `07_final_technical_report.md` contains the draft. Export, verify the required page count, and add actual deployment/API evidence before submission. |
 | 20 | Final presentation and defense (p7-8) | BLOCKED | `08_presentation_defense_guide.md` prepares the talk; students must present and defend the implemented system themselves. |
 

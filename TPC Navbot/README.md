@@ -1,5 +1,12 @@
 # TPC NavBot
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://tpcnavbottt-86x6mfwrmyvliw3xgpg2qp.streamlit.app/)
+
+> **🌐 Live Deployed Application**: [https://tpcnavbottt-86x6mfwrmyvliw3xgpg2qp.streamlit.app/](https://tpcnavbottt-86x6mfwrmyvliw3xgpg2qp.streamlit.app/)  
+> **Platform**: Streamlit Community Cloud (`randeleners4u/TPCNAVBOTTT`)  
+> **Institution**: Talibon Polytechnic College (TPC), San Isidro, Talibon, Bohol  
+
+
 The RAG optimization keeps the model and weights unchanged. Student-question
 patterns are separate from approved campus facts; default retrieval combines
 existing vectors with BM25 and checks claim-specific authority, dates, conflicts,
@@ -106,6 +113,8 @@ including three languages, missing facts, multipart requests, and abuse cases.
 It cannot establish accuracy for every possible question. See
 [answer quality and continuous improvement](docs/12_answer_quality_and_learning.md)
 for limits, review steps, and optional reviewed detail fields.
+
+The application is actively deployed at **[https://tpcnavbottt-86x6mfwrmyvliw3xgpg2qp.streamlit.app/](https://tpcnavbottt-86x6mfwrmyvliw3xgpg2qp.streamlit.app/)**.
 
 For Streamlit Community Cloud, the entrypoint is **`TPC Navbot/app.py`** relative
 to the GitHub repository root. See [the exact deployment setup](docs/07_deployment_and_containerization.md#streamlit-community-cloud).

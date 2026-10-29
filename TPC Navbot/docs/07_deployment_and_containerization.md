@@ -2,12 +2,16 @@
 
 ## Streamlit Community Cloud
 
-Deployment is prepared locally; no remote deployment is claimed.
+Deployment is live and verified on Streamlit Community Cloud:
+- **Live Deployed URL**: [https://tpcnavbottt-86x6mfwrmyvliw3xgpg2qp.streamlit.app/](https://tpcnavbottt-86x6mfwrmyvliw3xgpg2qp.streamlit.app/)
+- **Repository**: `randeleners4u/TPCNAVBOTTT` (branch: `main`)
+- **Main file path**: `TPC Navbot/app.py`
+- **Tested Python Version**: 3.13
 
 1. Commit and push the reviewed application changes, school-confirmed raw records,
    `data/source_registry.json`, assets, dependencies, and root `.streamlit/config.toml`.
 2. In Streamlit Community Cloud, create an app from repository
-   `mjaimesfromyt-sys/TPC-Navbot-20261022T143538Z-1-001` and the branch containing
+   `randeleners4u/TPCNAVBOTTT` and the branch containing
    the final changes. Set the main file path to **`TPC Navbot/app.py`**.
 3. In Advanced settings select Python **3.13**, the version tested locally.
    For the offline configuration used in the local chat checks, add these
